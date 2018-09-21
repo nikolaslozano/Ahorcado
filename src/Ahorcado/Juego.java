@@ -5,6 +5,8 @@
  */
 package Ahorcado;
 
+import java.awt.Container;
+import java.awt.Font;
 import javax.swing.JLabel;
 
 /**
@@ -14,10 +16,17 @@ import javax.swing.JLabel;
 public class Juego extends javax.swing.JFrame {
 
     Palabra maiGuord=new Palabra();
+    String palabraJugada="Hola";
     JLabel espacio[];
+    Font fuente=new Font("Calibri",2,30);
+    Container miContenedor=new Container();
     
     public Juego() {
         initComponents();
+        espacio=new JLabel[palabraJugada.length()];
+        for(int i=0;i<palabraJugada.length();i++){
+            espacio[i]=new JLabel();
+        }
     }
     
 
@@ -60,15 +69,19 @@ public class Juego extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenu1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu1MouseClicked
-        String palabraJugada=maiGuord.seleccionarPalabra();
-        System.out.println(palabraJugada+" tiene "+palabraJugada.length()+" letras.");
+        for(int i=0;i<palabraJugada.length();i++){
+            espacio[i].setVisible(false);
+        }
+        palabraJugada=maiGuord.seleccionarPalabra();
         espacio=new JLabel[palabraJugada.length()];
         for(int i=0;i<palabraJugada.length();i++){
             espacio[i]=new JLabel();
-            espacio[i].setBounds(5*i,0,5,5);
+            espacio[i].setBounds(30*i,0,30,30);
+            espacio[i].setFont(fuente);
             add(espacio[i]);
-            espacio[i].setText("Hola");
+            espacio[i].setText(palabraJugada.substring(i,i+1));
         }
+        
     }//GEN-LAST:event_jMenu1MouseClicked
 
     /**
@@ -111,3 +124,4 @@ public class Juego extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     // End of variables declaration//GEN-END:variables
 }
+
