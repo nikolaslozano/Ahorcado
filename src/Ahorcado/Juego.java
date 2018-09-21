@@ -16,6 +16,7 @@ import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -32,6 +33,7 @@ public class Juego extends javax.swing.JFrame {
     File miArchivo=new File("Monacho.jpg");
     JLabel parteImagen[]=new JLabel[5];
     Imagen muñeco = new Imagen();
+    int contMalas;
     
     
     public Juego() {
@@ -103,6 +105,7 @@ public class Juego extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenu1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu1MouseClicked
+        
         for(int i=0;i<palabraJugada.length();i++){
             espacio[i].setVisible(false);
         }
@@ -115,7 +118,11 @@ public class Juego extends javax.swing.JFrame {
             add(espacio[i]);
             espacio[i].setText("_");
         }
+        for(int i=0;i<5;i++){
+            parteImagen[i].setVisible(false);
+        }
         juegoEnCurso=true;
+        contMalas=0;
     }//GEN-LAST:event_jMenu1MouseClicked
 
     private void formKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyTyped
@@ -130,13 +137,35 @@ public class Juego extends javax.swing.JFrame {
                     }
                 }
                 if(letraCorrecta==false){
-                    System.out.println("Mal");
+                    parteImagen[contMalas].setVisible(true);
+                    if(contMalas==4){
+                        for(int i=0;i<palabraJugada.length();i++){
+                            espacio[i].setText(palabraJugada.substring(i, i+1));
+                        }
+                        JOptionPane.showMessageDialog(this, "Ha perdido el juego");
+                        juegoEnCurso=false;
+                    }else{
+                        contMalas++;
+                    }
+                }else{
+                    int cuentaEspacios=0;
+                    for(int i=0;i<palabraJugada.length();i++){
+                        if("_".equals(espacio[i].getText())){
+                            cuentaEspacios++;
+                        }
+                    }
+                    if(cuentaEspacios==0){
+                        JOptionPane.showMessageDialog(this, "Ha ganado el juego");
+                        juegoEnCurso=false;
+                    }
                 }
             }
             else
             {
                 evt.consume();
             }
+        }else{
+            evt.consume();
         }
     }//GEN-LAST:event_formKeyTyped
 
