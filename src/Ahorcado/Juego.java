@@ -56,8 +56,14 @@ public class Juego extends javax.swing.JFrame {
                 Logger.getLogger(Juego.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        
-        
+        invisibilizar();
+    }
+    void invisibilizar(){
+        Etiqueta.setVisible(false);
+        oquei.setVisible(false);
+        palabra.setVisible(false);
+        Etiqueta1.setVisible(false);
+        sí.setVisible(false);
     }
     
 
@@ -70,6 +76,11 @@ public class Juego extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        Etiqueta = new javax.swing.JLabel();
+        palabra = new javax.swing.JTextField();
+        oquei = new javax.swing.JButton();
+        Etiqueta1 = new javax.swing.JLabel();
+        sí = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
 
@@ -77,6 +88,24 @@ public class Juego extends javax.swing.JFrame {
         addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 formKeyTyped(evt);
+            }
+        });
+
+        Etiqueta.setText("¿Ya Sabes la palabra?");
+
+        oquei.setText("OK");
+        oquei.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                oqueiMouseClicked(evt);
+            }
+        });
+
+        Etiqueta1.setText("Si te equivocas pierdes");
+
+        sí.setText("Conozco la palabra");
+        sí.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                síMouseClicked(evt);
             }
         });
 
@@ -94,11 +123,36 @@ public class Juego extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(285, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(5, 5, 5)
+                        .addComponent(Etiqueta1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(5, 5, 5)
+                            .addComponent(Etiqueta, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                            .addComponent(oquei)
+                            .addComponent(sí)
+                            .addComponent(palabra, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 279, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(71, 71, 71)
+                .addComponent(Etiqueta)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(Etiqueta1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(sí, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(palabra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(oquei)
+                .addContainerGap(90, Short.MAX_VALUE))
         );
 
         pack();
@@ -123,6 +177,9 @@ public class Juego extends javax.swing.JFrame {
         }
         juegoEnCurso=true;
         contMalas=0;
+        Etiqueta.setVisible(true);
+        Etiqueta1.setVisible(true);
+        sí.setVisible(true);
     }//GEN-LAST:event_jMenu1MouseClicked
 
     private void formKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyTyped
@@ -142,8 +199,9 @@ public class Juego extends javax.swing.JFrame {
                         for(int i=0;i<palabraJugada.length();i++){
                             espacio[i].setText(palabraJugada.substring(i, i+1));
                         }
-                        JOptionPane.showMessageDialog(this, "Ha perdido el juego");
+                        JOptionPane.showMessageDialog(this, "PERDISTE");
                         juegoEnCurso=false;
+                        invisibilizar();
                     }else{
                         contMalas++;
                     }
@@ -155,8 +213,9 @@ public class Juego extends javax.swing.JFrame {
                         }
                     }
                     if(cuentaEspacios==0){
-                        JOptionPane.showMessageDialog(this, "Ha ganado el juego");
+                        JOptionPane.showMessageDialog(this, "GANASTE");
                         juegoEnCurso=false;
+                        invisibilizar();
                     }
                 }
             }
@@ -168,6 +227,29 @@ public class Juego extends javax.swing.JFrame {
             evt.consume();
         }
     }//GEN-LAST:event_formKeyTyped
+
+    private void oqueiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_oqueiMouseClicked
+        if(palabra.getText().equalsIgnoreCase(palabraJugada)){
+            for(int i=0;i<palabraJugada.length();i++){
+                espacio[i].setText(palabraJugada.substring(i, i+1));
+            }
+            JOptionPane.showMessageDialog(this, "GANASTE");
+            juegoEnCurso=false;
+            invisibilizar();
+        }else{
+            for(int i=0;i<palabraJugada.length();i++){
+                espacio[i].setText(palabraJugada.substring(i, i+1));
+            }
+            JOptionPane.showMessageDialog(this, "PERDISTE");
+            juegoEnCurso=false;
+            invisibilizar();
+        }
+    }//GEN-LAST:event_oqueiMouseClicked
+
+    private void síMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_síMouseClicked
+        palabra.setVisible(true);
+        oquei.setVisible(true);
+    }//GEN-LAST:event_síMouseClicked
 
     /**
      * @param args the command line arguments
@@ -205,8 +287,13 @@ public class Juego extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel Etiqueta;
+    private javax.swing.JLabel Etiqueta1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JButton oquei;
+    private javax.swing.JTextField palabra;
+    private javax.swing.JButton sí;
     // End of variables declaration//GEN-END:variables
 }
 
