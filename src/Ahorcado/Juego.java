@@ -186,7 +186,7 @@ public class Juego extends javax.swing.JFrame {
         char tecla = evt.getKeyChar();
         boolean letraCorrecta=false;
         if(juegoEnCurso==true){
-            if(tecla>='a'&&tecla<='z'||tecla>='A'&&tecla<='Z'){
+            if(tecla>='a'&&tecla<='z'||tecla>='A'&&tecla<='Z'||tecla=='ñ'||tecla=='Ñ'){
                 for(int i=0;i<palabraJugada.length();i++){
                     if(String.valueOf(tecla).equalsIgnoreCase(palabraJugada.substring(i, i+1))){
                         espacio[i].setText(palabraJugada.substring(i, i+1));
