@@ -7,6 +7,14 @@ package Ahorcado;
 
 import java.awt.Container;
 import java.awt.Font;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 /**
@@ -21,6 +29,9 @@ public class Juego extends javax.swing.JFrame {
     Font fuente=new Font("Calibri",2,30);
     Container miContenedor=new Container();
     boolean juegoEnCurso=false;
+    File miArchivo=new File("Monacho.jpg");
+    JLabel parteImagen[]=new JLabel[5];
+    Imagen muñeco = new Imagen();
     
     
     public Juego() {
@@ -29,6 +40,22 @@ public class Juego extends javax.swing.JFrame {
         for(int i=0;i<palabraJugada.length();i++){
             espacio[i]=new JLabel();
         }
+        for(int i=0;i<5;i++){
+            parteImagen[i]=new JLabel();
+            parteImagen[i].setBounds(30,50+(i*50),200,50);
+            add(parteImagen[i]);
+            try {
+                BufferedImage miImagen = ImageIO.read(miArchivo);
+                BufferedImage miniImagen = miImagen.getSubimage(0,50*i,200,50);
+                ImageIcon miIcono = new ImageIcon(miniImagen);
+                parteImagen[i].setIcon(miIcono);
+                parteImagen[i].setVisible(false);
+            } catch (IOException ex) {
+                Logger.getLogger(Juego.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        
+        
     }
     
 
