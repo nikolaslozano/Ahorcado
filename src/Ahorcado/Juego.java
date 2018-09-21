@@ -64,6 +64,9 @@ public class Juego extends javax.swing.JFrame {
         palabra.setVisible(false);
         Etiqueta1.setVisible(false);
         sí.setVisible(false);
+        Etiqueta2.setVisible(false);
+        jugadas.setText("");
+        jugadas.setVisible(false);
     }
     
 
@@ -81,6 +84,8 @@ public class Juego extends javax.swing.JFrame {
         oquei = new javax.swing.JButton();
         Etiqueta1 = new javax.swing.JLabel();
         sí = new javax.swing.JButton();
+        Etiqueta2 = new javax.swing.JLabel();
+        jugadas = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
 
@@ -109,6 +114,11 @@ public class Juego extends javax.swing.JFrame {
             }
         });
 
+        Etiqueta2.setText("Letras Jugadas:");
+
+        jugadas.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jugadas.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+
         jMenu1.setText("Iniciar Juego");
         jMenu1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -123,26 +133,31 @@ public class Juego extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(285, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(5, 5, 5)
-                        .addComponent(Etiqueta1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(Etiqueta2, javax.swing.GroupLayout.DEFAULT_SIZE, 92, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jugadas, javax.swing.GroupLayout.PREFERRED_SIZE, 315, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addGroup(layout.createSequentialGroup()
                             .addGap(5, 5, 5)
-                            .addComponent(Etiqueta, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                            .addComponent(oquei)
-                            .addComponent(sí)
-                            .addComponent(palabra, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(Etiqueta1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(5, 5, 5)
+                                .addComponent(Etiqueta, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                                .addComponent(oquei)
+                                .addComponent(sí)
+                                .addComponent(palabra, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(71, 71, 71)
+                .addGap(68, 68, 68)
                 .addComponent(Etiqueta)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(Etiqueta1)
@@ -152,7 +167,10 @@ public class Juego extends javax.swing.JFrame {
                 .addComponent(palabra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(oquei)
-                .addContainerGap(90, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 126, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(Etiqueta2, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jugadas, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
         pack();
@@ -180,12 +198,15 @@ public class Juego extends javax.swing.JFrame {
         Etiqueta.setVisible(true);
         Etiqueta1.setVisible(true);
         sí.setVisible(true);
+        Etiqueta2.setVisible(true);
+        jugadas.setVisible(true);
     }//GEN-LAST:event_jMenu1MouseClicked
 
     private void formKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyTyped
         char tecla = evt.getKeyChar();
         boolean letraCorrecta=false;
         if(juegoEnCurso==true){
+            jugadas.setText(jugadas.getText() + String.valueOf(tecla) + " ");
             if(tecla>='a'&&tecla<='z'||tecla>='A'&&tecla<='Z'||tecla=='ñ'||tecla=='Ñ'){
                 for(int i=0;i<palabraJugada.length();i++){
                     if(String.valueOf(tecla).equalsIgnoreCase(palabraJugada.substring(i, i+1))){
@@ -289,8 +310,10 @@ public class Juego extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Etiqueta;
     private javax.swing.JLabel Etiqueta1;
+    private javax.swing.JLabel Etiqueta2;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JLabel jugadas;
     private javax.swing.JButton oquei;
     private javax.swing.JTextField palabra;
     private javax.swing.JButton sí;
