@@ -20,6 +20,8 @@ public class Juego extends javax.swing.JFrame {
     JLabel espacio[];
     Font fuente=new Font("Calibri",2,30);
     Container miContenedor=new Container();
+    boolean juegoEnCurso=false;
+    
     
     public Juego() {
         initComponents();
@@ -43,6 +45,11 @@ public class Juego extends javax.swing.JFrame {
         jMenu1 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                formKeyTyped(evt);
+            }
+        });
 
         jMenu1.setText("Iniciar Juego");
         jMenu1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -76,13 +83,35 @@ public class Juego extends javax.swing.JFrame {
         espacio=new JLabel[palabraJugada.length()];
         for(int i=0;i<palabraJugada.length();i++){
             espacio[i]=new JLabel();
-            espacio[i].setBounds(30*i,0,30,30);
+            espacio[i].setBounds(30*i,10,30,30);
             espacio[i].setFont(fuente);
             add(espacio[i]);
-            espacio[i].setText(palabraJugada.substring(i,i+1));
+            espacio[i].setText("_");
         }
-        
+        juegoEnCurso=true;
     }//GEN-LAST:event_jMenu1MouseClicked
+
+    private void formKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyTyped
+        char tecla = evt.getKeyChar();
+        boolean letraCorrecta=false;
+        if(juegoEnCurso==true){
+            if(tecla>='a'&&tecla<='z'||tecla>='A'&&tecla<='Z'){
+                for(int i=0;i<palabraJugada.length();i++){
+                    if(String.valueOf(tecla).equalsIgnoreCase(palabraJugada.substring(i, i+1))){
+                        espacio[i].setText(palabraJugada.substring(i, i+1));
+                        letraCorrecta=true;
+                    }
+                }
+                if(letraCorrecta==false){
+                    System.out.println("Mal");
+                }
+            }
+            else
+            {
+                evt.consume();
+            }
+        }
+    }//GEN-LAST:event_formKeyTyped
 
     /**
      * @param args the command line arguments
