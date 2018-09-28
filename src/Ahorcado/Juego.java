@@ -27,7 +27,7 @@ public class Juego extends javax.swing.JFrame {
     Palabra maiGuord=new Palabra();
     String palabraJugada="Hola";
     JLabel espacio[];
-    Font fuente=new Font("Calibri",2,30);
+    Font fuente=new Font("Arial",1,30);
     Container miContenedor=new Container();
     boolean juegoEnCurso=false;
     File miArchivo=new File("Monacho.jpg");
@@ -185,7 +185,7 @@ public class Juego extends javax.swing.JFrame {
         espacio=new JLabel[palabraJugada.length()];
         for(int i=0;i<palabraJugada.length();i++){
             espacio[i]=new JLabel();
-            espacio[i].setBounds(30*i,10,30,30);
+            espacio[i].setBounds((30*i)+5,10,30,35);
             espacio[i].setFont(fuente);
             add(espacio[i]);
             espacio[i].setText("_");
@@ -206,8 +206,8 @@ public class Juego extends javax.swing.JFrame {
         char tecla = evt.getKeyChar();
         boolean letraCorrecta=false;
         if(juegoEnCurso==true){
-            jugadas.setText(jugadas.getText() + String.valueOf(tecla) + " ");
             if(tecla>='a'&&tecla<='z'||tecla>='A'&&tecla<='Z'||tecla=='ñ'||tecla=='Ñ'){
+                jugadas.setText(jugadas.getText() + String.valueOf(tecla) + " ");
                 for(int i=0;i<palabraJugada.length();i++){
                     if(String.valueOf(tecla).equalsIgnoreCase(palabraJugada.substring(i, i+1))){
                         espacio[i].setText(palabraJugada.substring(i, i+1));
